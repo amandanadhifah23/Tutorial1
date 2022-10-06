@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-danger">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="https://id.wikipedia.org/wiki/BTS">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Food</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Drink</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Dessert</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">{{nama}}</a>
+          </li>
+        </ul>
+          <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+<table class="table table-bordered border-dark, position-absolute top-50 start-50 translate-middle">
+</table>
+<h5 class="text-white bg-dark" style="text-align: center;">Sesi terakhir login: {{ last_login }}</h5>
+
+
+
+<div>
+    <form method="POST" action="" id="formtable" class="d-flex justify-content-center">
+      <div class="bg-info d-flex justify-content-center p-2 rounded-2 p-3">
+        {% csrf_token %}
+        <table class="table table-striped-columns table-bordered">
+          <tr>
+              <td>Nama Barang: </td>
+              <td><input type="text" name="items" placeholder="Nama Barang" class="form-control" id="items_name"></td>
+          </tr>
+          <tr>
+              <td>Harga Barang: </td>
+              <td><input type="text" name="items_price" placeholder="Harga Barang" class="form-control" id="items_harga"></td>
+          </tr>
+          <tr>
+              <td>Deskripsi: </td>
+              <td><input type="text" name="items_desc" placeholder="Deskripsi" class="form-control" id="items_description"></td>
+          </tr>
+          
+          </table>
+          <button type="submit" id="masuk" class="btn border rounded bg-secondary">Add Barang</button>
+      </div>
+
+    </form>
+   </div> 
+</body>
+</html>
+
+<script>
+
+(document).ready(function(){
+        $.get("{% url 'wishlist:show_json' %}", function (data){
+        //     data = ''
+        //    for (data in items)
+
+        });
+      }); 
+
+(document).ready(function() {
+    $.ajax( {
+        url: "{ % url 'wishlist:tbl-form' }",
+        data: {
+            nama_barang: $("#items_name").val(),
+            harga_barang: $("#items_harga").val(),
+            deskripsi: $("#items_description").val(),
+        }
+
+    })
+})
+
+</script>
+
+{% endblock content %}
